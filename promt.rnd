@@ -1,0 +1,937 @@
+# Prompt: Steash_Scoop E-Commerce Frontend
+
+Act as a **senior frontend developer and UI/UX designer** and build a complete, modern, responsive e-commerce frontend website called **`steash_scoop`**.
+
+The project must be developed using:
+
+* **HTML5**
+* **CSS3**
+* **Bootstrap 5**
+* **ReactJS**
+* **JavaScript (ES6+)**
+
+Do not use Angular, Vue, or other frontend frameworks.
+
+## 1. Overall Website Concept
+
+Create a professional e-commerce shopping platform named **Steash_Scoop**.
+
+The website should have a modern, premium, clean, attractive design suitable for a next-generation online shopping experience.
+
+The design should be:
+
+* Modern
+* Minimal
+* Professional
+* Mobile-friendly
+* Desktop-friendly
+* Fast and easy to navigate
+* Visually attractive
+* User-friendly
+* Fully responsive
+
+Use smooth animations, hover effects, transitions, cards, shadows, rounded corners, and modern typography.
+
+---
+
+# 2. Color Theme
+
+Use a premium e-commerce color palette.
+
+Primary colors:
+
+* Background: #FFF8F3
+* Primary: #FF6B35
+* Secondary: #2D2D2D
+* Accent: #F7C59F
+* White: #FFFFFF
+* Text: #222222
+* Muted text: #777777
+
+The website should have a warm and premium appearance.
+
+Use the **Steash_Scoop** brand name prominently in the navigation bar.
+
+---
+
+# 3. Project Structure
+
+Create a clean React project structure:
+
+```text
+steash_scoop/
+│
+├── public/
+│   ├── images/
+│   └── favicon.ico
+│
+├── src/
+│   ├── assets/
+│   │
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ProductCard.jsx
+│   │   ├── CategoryCard.jsx
+│   │   ├── SearchBar.jsx
+│   │   ├── CartItem.jsx
+│   │   ├── ProductFilter.jsx
+│   │   └── Rating.jsx
+│   │
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Shop.jsx
+│   │   ├── ProductDetails.jsx
+│   │   ├── Cart.jsx
+│   │   ├── Wishlist.jsx
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── Checkout.jsx
+│   │   └── NotFound.jsx
+│   │
+│   ├── data/
+│   │   └── products.js
+│   │
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│
+├── package.json
+└── README.md
+```
+
+Use reusable React components instead of writing everything inside one file.
+
+---
+
+# 4. Navigation Bar
+
+Create a responsive Bootstrap navigation bar.
+
+Desktop navigation:
+
+**Steash_Scoop Logo | Home | Shop | Categories | Deals | New Arrivals | About**
+
+Right side:
+
+* Search icon
+* Wishlist icon
+* Shopping cart icon with item count
+* User/account icon
+
+Example:
+
+```text
+STEASH_SCOOP
+
+Home   Shop   Categories   Deals   New Arrivals   About
+
+                         🔍  ♡  🛒  👤
+```
+
+On mobile:
+
+* Hamburger menu
+* Steash_Scoop logo
+* Search icon
+* Cart icon
+
+Make the navbar sticky while scrolling.
+
+---
+
+# 5. Homepage
+
+Create a visually impressive homepage.
+
+## Hero Section
+
+Create a large hero banner with:
+
+**Headline:**
+
+"Discover Your Next Favorite"
+
+**Subheading:**
+
+"Shop smarter. Discover better. Experience Steash_Scoop."
+
+Buttons:
+
+* Shop Now
+* Explore Collections
+
+Add a high-quality e-commerce hero image.
+
+Use a modern two-column layout:
+
+Left:
+
+```text
+Discover Your Next Favorite
+Shop smarter. Discover better.
+
+[ Shop Now ] [ Explore Collections ]
+```
+
+Right:
+
+Large product/lifestyle image.
+
+Add subtle floating animation elements.
+
+---
+
+# 6. Categories Section
+
+Create a "Shop By Category" section.
+
+Categories could include:
+
+* Fashion
+* Electronics
+* Beauty
+* Home & Living
+* Accessories
+* Sports
+* Footwear
+* Gadgets
+
+Each category should have:
+
+* Image
+* Category name
+* Product count
+* Hover animation
+
+Use Bootstrap responsive grid.
+
+Example:
+
+```text
+SHOP BY CATEGORY
+
+[ Fashion ] [ Electronics ] [ Beauty ] [ Home ]
+
+[ Sports ]  [ Footwear ]   [ Gadgets ] [ Accessories ]
+```
+
+---
+
+# 7. Featured Products
+
+Create a section:
+
+**Featured Products**
+
+Display products using reusable `ProductCard.jsx`.
+
+Each product card should contain:
+
+* Product image
+* Product name
+* Category
+* Star rating
+* Number of reviews
+* Current price
+* Original price
+* Discount percentage
+* Wishlist heart icon
+* Add to Cart button
+* Quick View button
+
+Example:
+
+```text
+┌──────────────────────────┐
+│        PRODUCT IMAGE     │
+│                    ♡     │
+│       -30%              │
+├──────────────────────────┤
+│ Premium Sneakers         │
+│ ⭐⭐⭐⭐⭐ (124)            │
+│ ₹2,499   ₹3,499          │
+│                          │
+│     [ Add to Cart ]      │
+└──────────────────────────┘
+```
+
+Add hover effects where the product image slightly zooms and action buttons appear.
+
+---
+
+# 8. Flash Deals Section
+
+Create a visually attractive:
+
+**🔥 Flash Deals**
+
+section.
+
+Display:
+
+* Discount percentage
+* Product
+* Price
+* Original price
+* Countdown timer
+
+Example:
+
+```text
+FLASH DEALS
+
+Limited Time Offers
+
+02 : 14 : 35 : 42
+
+[Product] [Product] [Product] [Product]
+```
+
+Use JavaScript/React state for a working countdown timer.
+
+---
+
+# 9. New Arrivals
+
+Create a:
+
+**✨ New Arrivals**
+
+section.
+
+Display 6–8 new products.
+
+Use horizontal cards or responsive Bootstrap cards.
+
+Include:
+
+```text
+NEW
+Product Name
+Rating
+₹ Price
+[View Product]
+```
+
+---
+
+# 10. Promotional Banner
+
+Create a large promotional banner:
+
+```text
+SUMMER COLLECTION
+
+Up to 50% OFF
+
+Refresh your style with our latest collection.
+
+[ Shop Collection ]
+```
+
+Use a beautiful background image.
+
+---
+
+# 11. Why Choose Steash_Scoop
+
+Create a section with four features:
+
+### 🚚 Fast Delivery
+
+Get your products delivered quickly.
+
+### 🔒 Secure Payments
+
+Safe and secure payment experience.
+
+### ↩ Easy Returns
+
+Simple and hassle-free returns.
+
+### 🎧 24/7 Support
+
+Our support team is always ready to help.
+
+Use Bootstrap icons or Font Awesome icons.
+
+---
+
+# 12. Customer Reviews
+
+Create a customer testimonial section.
+
+Example:
+
+```text
+WHAT OUR CUSTOMERS SAY
+
+⭐⭐⭐⭐⭐
+
+"Steash_Scoop has an amazing collection.
+The shopping experience was smooth and easy."
+
+- Sarah M.
+Verified Customer
+```
+
+Create 3–4 review cards.
+
+---
+
+# 13. Newsletter Section
+
+Create:
+
+```text
+Stay in the Scoop! 🛍️
+
+Subscribe to get exclusive deals,
+new arrivals and special offers.
+
+[ Enter your email ] [ Subscribe ]
+```
+
+Use form validation.
+
+---
+
+# 14. Footer
+
+Create a professional multi-column footer.
+
+Columns:
+
+### Steash_Scoop
+
+About the brand.
+
+### Quick Links
+
+* Home
+* Shop
+* About
+* Contact
+* FAQ
+
+### Customer Service
+
+* Shipping
+* Returns
+* Privacy Policy
+* Terms & Conditions
+
+### Follow Us
+
+* Instagram
+* Facebook
+* Twitter/X
+* YouTube
+
+Bottom:
+
+```text
+© 2026 Steash_Scoop. All Rights Reserved.
+```
+
+---
+
+# 15. Shop Page
+
+Create a complete product listing page.
+
+Layout:
+
+```text
+SHOP
+
+Search Products
+
+-------------------------------------
+
+Categories       Products
+
+□ Fashion        [Product] [Product]
+□ Electronics    [Product] [Product]
+□ Beauty         [Product] [Product]
+□ Home           [Product] [Product]
+
+Price Range
+
+Min ₹ ---- Max ₹ ----
+
+Rating
+
+☆ ☆ ☆ ☆ ☆
+
+Sort By:
+[ Popularity ▼ ]
+```
+
+Include:
+
+* Search
+* Category filtering
+* Price filtering
+* Rating filtering
+* Sorting
+* Pagination
+* Grid/list toggle
+
+The filtering should work using React state.
+
+---
+
+# 16. Product Details Page
+
+Create a detailed product page.
+
+Layout:
+
+Left:
+
+* Product image gallery
+* Thumbnail images
+* Zoom effect
+
+Right:
+
+```text
+Premium Product Name
+
+⭐⭐⭐⭐⭐ 4.8 (250 Reviews)
+
+₹2,499
+₹3,499
+30% OFF
+
+Available in stock
+
+Select Size:
+[S] [M] [L] [XL]
+
+Select Color:
+● ● ●
+
+Quantity:
+[-] 1 [+]
+
+[ Add to Cart ]
+[ Buy Now ]
+
+♡ Add to Wishlist
+```
+
+Below:
+
+Tabs:
+
+* Description
+* Specifications
+* Reviews
+* Shipping Information
+
+---
+
+# 17. Shopping Cart
+
+Create a fully responsive cart page.
+
+Display:
+
+```text
+YOUR CART
+
+Product       Price     Quantity    Total
+------------------------------------------------
+Product 1     ₹999      [- 1 +]      ₹999
+Product 2     ₹499      [- 2 +]      ₹998
+
+Subtotal: ₹1,997
+Discount: -₹200
+Delivery: FREE
+
+TOTAL: ₹1,797
+
+[ Continue Shopping ]
+[ Proceed to Checkout ]
+```
+
+Allow users to:
+
+* Increase quantity
+* Decrease quantity
+* Remove products
+* See subtotal
+* See discount
+* See total
+
+Use React state for cart management.
+
+---
+
+# 18. Wishlist
+
+Create a wishlist page.
+
+Users should be able to:
+
+* Add products
+* Remove products
+* Move product to cart
+* View product
+* See price and discount
+
+Use the heart icon throughout the website.
+
+---
+
+# 19. Login Page
+
+Create a modern login interface.
+
+Fields:
+
+* Email
+* Password
+
+Buttons:
+
+```text
+[ Login ]
+
+Forgot Password?
+
+Don't have an account?
+Create Account
+```
+
+Add:
+
+* Show/hide password
+* Form validation
+* Remember me checkbox
+* Google login UI placeholder
+
+---
+
+# 20. Registration Page
+
+Fields:
+
+* Full Name
+* Email
+* Phone
+* Password
+* Confirm Password
+
+Button:
+
+```text
+[ Create Account ]
+```
+
+Add proper validation.
+
+---
+
+# 21. Checkout Page
+
+Create a clean checkout page.
+
+Sections:
+
+### Customer Information
+
+* Full Name
+* Email
+* Phone
+
+### Shipping Address
+
+* Address
+* City
+* State
+* PIN Code
+* Country
+
+### Order Summary
+
+Show:
+
+* Products
+* Quantity
+* Subtotal
+* Discount
+* Shipping
+* Total
+
+### Payment Method
+
+Provide UI for:
+
+* Credit/Debit Card
+* UPI
+* Net Banking
+* Cash on Delivery
+
+Do not store card information in frontend code.
+
+The payment interface should be designed so that it can later be connected to a secure payment gateway such as Razorpay or Stripe.
+
+---
+
+# 22. Responsive Design
+
+The entire application MUST work perfectly on:
+
+### Mobile
+
+```text
+320px
+375px
+390px
+414px
+```
+
+### Tablet
+
+```text
+768px
+820px
+1024px
+```
+
+### Desktop
+
+```text
+1280px
+1440px
+1920px
+```
+
+Use Bootstrap breakpoints and responsive CSS.
+
+Avoid horizontal scrolling.
+
+---
+
+# 23. React Functionality
+
+Implement:
+
+* React components
+* React hooks
+* `useState`
+* `useEffect`
+* Props
+* React Router
+* Product data management
+* Cart state
+* Wishlist state
+* Search
+* Filtering
+* Sorting
+* Product details
+* Quantity management
+* Form validation
+* Countdown timer
+
+Use reusable components wherever possible.
+
+---
+
+# 24. Product Data
+
+Create sample product data in:
+
+```text
+src/data/products.js
+```
+
+Include at least **20 products**.
+
+Each product should contain:
+
+```javascript
+{
+  id: 1,
+  name: "Premium Sneakers",
+  category: "Footwear",
+  price: 2499,
+  originalPrice: 3499,
+  discount: 30,
+  rating: 4.8,
+  reviews: 124,
+  image: "...",
+  description: "...",
+  stock: 25
+}
+```
+
+Use Indian Rupee formatting:
+
+```text
+₹2,499
+```
+
+---
+
+# 25. Animations
+
+Add subtle professional animations:
+
+* Navbar transition
+* Card hover
+* Image zoom
+* Button hover
+* Fade-in sections
+* Smooth scrolling
+* Wishlist animation
+* Cart animation
+* Loading skeleton
+* Page transitions
+
+Do not overuse animations.
+
+The site should remain fast and professional.
+
+---
+
+# 26. Accessibility
+
+Follow basic accessibility practices:
+
+* Semantic HTML
+* Proper labels
+* Alt text for images
+* Keyboard navigation
+* Accessible buttons
+* Good color contrast
+* ARIA labels where necessary
+
+---
+
+# 27. Performance
+
+Optimize the frontend:
+
+* Lazy-load images
+* Reusable components
+* Avoid unnecessary renders
+* Optimize CSS
+* Use responsive images
+* Keep JavaScript clean
+* Avoid duplicate code
+
+---
+
+# 28. Bootstrap Requirements
+
+Use **Bootstrap 5** for:
+
+* Grid system
+* Navbar
+* Buttons
+* Cards
+* Forms
+* Modal
+* Dropdown
+* Carousel
+* Badges
+* Alerts
+* Responsive utilities
+
+Custom CSS should be used to give the website its unique Steash_Scoop design.
+
+Do not make the website look like a default Bootstrap template.
+
+---
+
+# 29. Icons
+
+Use Bootstrap Icons or another lightweight icon library.
+
+Use icons for:
+
+* Search
+* Cart
+* Wishlist
+* User
+* Menu
+* Star
+* Arrow
+* Filter
+* Trash
+* Plus
+* Minus
+* Social media
+
+---
+
+# 30. Code Quality
+
+Follow professional coding practices:
+
+* Clean component structure
+* Meaningful variable names
+* Reusable components
+* No unnecessary duplication
+* Proper comments
+* Modular CSS
+* Responsive design
+* Maintainable React code
+
+Do not place the entire application in `App.jsx`.
+
+---
+
+# 31. Final User Experience
+
+The final Steash_Scoop website should feel like a real production-level e-commerce platform.
+
+The user should be able to navigate:
+
+```text
+Home
+  ↓
+Shop
+  ↓
+Product Listing
+  ↓
+Product Details
+  ↓
+Add to Cart
+  ↓
+Cart
+  ↓
+Checkout
+  ↓
+Payment
+```
+
+Also support:
+
+```text
+Home
+ ↓
+Wishlist
+ ↓
+Product
+ ↓
+Add to Cart
+```
+
+The final interface should look polished enough to be used as a **professional portfolio project and a foundation for a real e-commerce application**.
+
+Generate all necessary React components, HTML structure, CSS styling, Bootstrap classes, sample product data, routing, responsive layouts, and JavaScript functionality.
+
+Make sure the application runs correctly with:
+
+```bash
+npm install
+npm run dev
+```
+
+Do not leave major sections as empty placeholders. Provide a complete working frontend with realistic sample data and images.
