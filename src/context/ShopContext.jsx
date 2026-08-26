@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { productsData } from '../data/products';
+import { supabase } from '../lib/supabase';
 
 const ShopContext = createContext();
 
@@ -21,6 +22,21 @@ export const ShopProvider = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [toast, setToast] = useState(null);
+
+  // Supabase auth user state
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user: currentUser } }) => {
+      setUser(currentUser);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('staesh_cart', JSON.stringify(cart));
@@ -128,7 +144,9 @@ export const ShopProvider = ({ children }) => {
         getCartSubtotal,
         getCartOriginalTotal,
         toggleWishlist,
-        isInWishlist
+        isInWishlist,
+        user,
+        setUser
       }}
     >
       {children}

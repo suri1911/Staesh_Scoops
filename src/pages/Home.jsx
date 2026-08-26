@@ -5,23 +5,66 @@ import CategoryCard from '../components/CategoryCard';
 import { categoriesData, reviewsData } from '../data/products';
 import { useShop } from '../context/ShopContext';
 
+const heroImages = [
+  'dist/front image/pexels-mew-wy-1427872-4072329.jpg',
+  'dist/front image/pexels-cottonbro-7130023.jpg',
+  'dist/front image/pexels-miriam-alonso-7585703.jpg',
+  'dist/front image/pexels-rebornfilmes-36553497.jpg',
+  'dist/front image/pexels-nhavan-34151703.jpg',
+  'dist/front image/pexels-madeinegypt-ca-121489142-10820346.jpg',
+  'dist/front image/pexels-shaddam-hossain-3417842-38180246.jpg',
+  'dist/front image/pexels-settlemania-16940629.jpg',
+];
+
+const HeroSlider = () => {
+  const [currentIdx, setCurrentIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '1rem' }} className="shadow-lg animated-float">
+      {heroImages.map((src, idx) => (
+        <img
+          key={src}
+          src={src}
+          alt={`Hero ${idx + 1}`}
+          className="img-fluid"
+          style={{
+            maxHeight: '480px',
+            width: '100%',
+            objectFit: 'cover',
+            display: idx === currentIdx ? 'block' : 'none',
+            transition: 'opacity 0.5s ease-in-out',
+            opacity: idx === currentIdx ? 1 : 0
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const Home = () => {
   const { products, showToast } = useShop();
 
   // Flash Deals Countdown Timer State (Hours, Minutes, Seconds)
-  const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 14, seconds: 35 });
+  // const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 14, seconds: 35 });
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
-        if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        if (prev.hours > 0) return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        return { hours: 2, minutes: 0, seconds: 0 };
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setTimeLeft(prev => {
+  //       if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
+  //       if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+  //       if (prev.hours > 0) return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
+  //       return { hours: 2, minutes: 0, seconds: 0 };
+  //     });
+  //   }, 1000);
+  //   return () => clearInterval(timer);
+  // }, []);
 
   // Newsletter State
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -44,7 +87,7 @@ const Home = () => {
         <div className="container">
           <div className="row align-items-center g-5">
             <div className="col-lg-6">
-              <span className="badge-category mb-3">✨ #1 Women's Accessories Destination</span>
+              <span className="badge-category mb-3">✨ Women's Accessories Destination</span>
               <h1 className="display-4 fw-extrabold text-dark mb-3 font-heading">
                 Elevate Your Everyday <br />
                 <span className="text-primary">Women's Accessories</span>
@@ -61,11 +104,11 @@ const Home = () => {
                 </Link>
               </div>
 
-              {/* Stats Bar */}
-              <div className="d-flex gap-4 mt-5 pt-3 border-top border-warning border-opacity-50">
+              {/* Stats/Trust Badges */}
+              <div className="d-flex gap-4 mt-5 pt-4 border-top">
                 <div>
-                  <h4 className="fw-bold mb-0 text-dark font-heading">15k+</h4>
-                  <span className="text-muted small">Stylish Women</span>
+                  <h4 className="fw-bold mb-0 text-dark font-heading">10K+</h4>
+                  <span className="text-muted small">Happy Women</span>
                 </div>
                 <div className="border-start ps-4">
                   <h4 className="fw-bold mb-0 text-dark font-heading">300+</h4>
@@ -81,23 +124,18 @@ const Home = () => {
             {/* Hero Image */}
             <div className="col-lg-6 text-center position-relative">
               <div className="position-relative d-inline-block">
-                <img
-                  src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80"
-                  alt="Staesh_Scoops Women's Jewelry & Accessories"
-                  className="img-fluid rounded-4 shadow-lg animated-float"
-                  style={{ maxHeight: '480px', objectFit: 'cover' }}
-                />
+                <HeroSlider />
                 <div
-                  className="position-absolute bottom-0 start-0 m-4 bg-white p-3 rounded-4 shadow-lg text-start d-flex align-items-center gap-3 border border-warning"
-                  style={{ backdropFilter: 'blur(10px)', background: 'rgba(255, 255, 255, 0.95)' }}
+                  // className="position-absolute bottom-0 start-0 m-4 bg-white p-3 rounded-4 shadow-lg text-start d-flex align-items-center gap-3 border border-warning"
+                  // style={{ backdropFilter: 'blur(10px)', background: 'rgba(255, 255, 255, 0.95)' }}
                 >
-                  <div className="bg-primary text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px' }}>
+                  {/* <div className="bg-primary text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px' }}>
                     <i className="bi bi-gem fs-5"></i>
                   </div>
                   <div>
-                    <span className="d-block fw-bold text-dark small">Tarnish-Free Gold Jewelry</span>
+                    <h6 className="mb-0 fw-bold">Flash Sale Active</h6>
                     <span className="text-primary fw-extrabold extra-small">Up to 35% OFF</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -145,17 +183,17 @@ const Home = () => {
       </section>
 
       {/* 4. FLASH DEALS SECTION WITH LIVE COUNTDOWN TIMER */}
-      <section className="py-5" style={{ background: 'linear-gradient(135deg, #2D2D2D 0%, #1A1A1A 100%)', color: 'white' }}>
+      {/* <section className="py-5" style={{ background: 'linear-gradient(135deg, #2D2D2D 0%, #1A1A1A 100%)', color: 'white' }}>
         <div className="container">
           <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 pb-3 border-bottom border-secondary">
             <div>
               <span className="badge bg-warning text-dark font-heading fw-bold mb-2">LIMITED TIME ACCESSORY SALE</span>
               <h2 className="section-title text-white mb-1">🔥 Flash Deals</h2>
               <p className="text-secondary mb-0">Grab top trending handbags & jewelry before time runs out!</p>
-            </div>
+            </div> */}
 
             {/* Timer Counter Display */}
-            <div className="d-flex align-items-center gap-2 mt-3 mt-md-0">
+            {/* <div className="d-flex align-items-center gap-2 mt-3 mt-md-0">
               <span className="text-secondary me-2 fw-semibold">Ends In:</span>
               <div className="timer-box">{String(timeLeft.hours).padStart(2, '0')}h</div>
               <span className="fs-4 text-warning fw-bold">:</span>
@@ -173,7 +211,7 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 5. NEW ARRIVALS */}
       <section className="py-5">
@@ -198,7 +236,7 @@ const Home = () => {
       </section>
 
       {/* 6. PROMOTIONAL BANNER */}
-      <section className="container py-4">
+      {/* <section className="container py-4">
         <div
           className="rounded-4 overflow-hidden p-5 text-white position-relative shadow-lg"
           style={{
@@ -218,7 +256,7 @@ const Home = () => {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 7. WHY CHOOSE STAESH_SCOOPS */}
       <section className="py-5 bg-white mt-4">
@@ -302,33 +340,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 9. NEWSLETTER SECTION */}
-      <section className="py-5 bg-primary text-white">
-        <div className="container">
-          <div className="row justify-content-center text-center">
-            <div className="col-lg-8">
-              <span className="fs-1 d-block mb-2">💎</span>
-              <h2 className="fw-extrabold text-white mb-3 font-heading">Join The Staesh VIP Club!</h2>
-              <p className="lead mb-4 text-light">
-                Subscribe to get VIP access to new jewelry drops, styling tips, and ₹500 off your first order!
-              </p>
-              <form onSubmit={handleNewsletterSubmit} className="d-flex flex-column flex-sm-row gap-2 justify-content-center max-w-lg mx-auto">
-                <input
-                  type="email"
-                  className="form-control form-control-lg rounded-pill border-0 px-4"
-                  placeholder="Enter your email address..."
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  required
-                />
-                <button type="submit" className="btn btn-dark btn-lg rounded-pill px-4 fw-bold font-heading">
-                  Subscribe
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

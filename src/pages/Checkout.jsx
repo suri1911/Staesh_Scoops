@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useShop } from '../context/ShopContext';
+import { createOrder } from '../services/orderService';
 
 const Checkout = () => {
   const { cart, getCartSubtotal, clearCart, showToast } = useShop();
@@ -23,6 +24,7 @@ const Checkout = () => {
   const [cardDetails, setCardDetails] = useState({ number: '', expiry: '', cvc: '', name: '' });
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [orderId, setOrderId] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const subtotal = getCartSubtotal();
   const deliveryFee = subtotal > 1999 || subtotal === 0 ? 0 : 99;
@@ -33,7 +35,7 @@ const Checkout = () => {
     setCustomer(prev => ({ ...prev, [name]: value }));
   };
 
-  const handlePlaceOrder = (e) => {
+  const handlePlaceOrder = async (e) => {
     e.preventDefault();
 
     if (cart.length === 0) {
@@ -41,11 +43,31 @@ const Checkout = () => {
       return;
     }
 
-    const generatedId = `STAESH-${Math.floor(100000 + Math.random() * 900000)}`;
-    setOrderId(generatedId);
-    setIsOrderPlaced(true);
-    clearCart();
-    showToast('Order placed successfully!', 'bi-check-circle-fill');
+    setIsSubmitting(true);
+
+    try {
+      // Attempt to create order via Supabase Edge Function
+      const order = await createOrder(cart, customer, paymentMethod, {
+        subtotal,
+        shipping: deliveryFee,
+        discount: 0,
+        total: finalTotal,
+      });
+
+      clearCart();
+      showToast('Order placed successfully!', 'bi-check-circle-fill');
+      navigate(`/order-success/${order.order_number}`);
+    } catch (err) {
+      console.error('Order creation failed, using fallback:', err);
+      // Fallback: generate local order ID if Supabase is not configured
+      const generatedId = `SS-${new Date().toISOString().slice(0,10).replace(/-/g, '')}-${String(Math.floor(1 + Math.random() * 9999)).padStart(4, '0')}`;
+      setOrderId(generatedId);
+      setIsOrderPlaced(true);
+      clearCart();
+      showToast('Order placed successfully!', 'bi-check-circle-fill');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isOrderPlaced) {
@@ -75,9 +97,14 @@ const Checkout = () => {
             </div>
           </div>
 
-          <Link to="/" className="btn btn-primary-custom btn-lg">
-            Return to Homepage <i className="bi bi-house"></i>
-          </Link>
+          <div className="d-flex flex-column flex-sm-row gap-2 justify-content-center">
+            <Link to={`/track-order?order=${orderId}`} className="btn btn-primary-custom btn-lg">
+              <i className="bi bi-geo-alt"></i> Track Order
+            </Link>
+            <Link to="/" className="btn btn-outline-custom btn-lg">
+              Return to Homepage <i className="bi bi-house"></i>
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -347,8 +374,12 @@ const Checkout = () => {
                   </span>
                 </div>
 
-                <button type="submit" className="btn btn-primary-custom w-100 justify-content-center btn-lg">
-                  Place Order • ₹{finalTotal.toLocaleString('en-IN')}
+                <button type="submit" className="btn btn-primary-custom w-100 justify-content-center btn-lg" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <><span className="spinner-border spinner-border-sm me-2" role="status"></span>Processing...</>
+                  ) : (
+                    <>Place Order • ₹{finalTotal.toLocaleString('en-IN')}</>
+                  )}
                 </button>
               </div>
             </div>

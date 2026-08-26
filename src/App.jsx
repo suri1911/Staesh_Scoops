@@ -17,6 +17,12 @@ import Register from './pages/Register';
 import Checkout from './pages/Checkout';
 import NotFound from './pages/NotFound';
 
+// New Pages — Order Tracking & Admin
+import TrackOrder from './pages/TrackOrder';
+import OrderSuccess from './pages/OrderSuccess';
+import MyOrders from './pages/MyOrders';
+import AdminOrders from './pages/AdminOrders';
+
 // Helper to scroll page to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -43,6 +49,10 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/track-order" element={<TrackOrder />} />
+              <Route path="/order-success/:orderNumber" element={<OrderSuccess />} />
+              <Route path="/my-orders" element={<MyOrders />} />
+              <Route path="/admin/orders" element={<AdminOrders />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

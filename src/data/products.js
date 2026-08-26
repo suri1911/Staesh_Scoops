@@ -5,52 +5,64 @@
 
 export const categoriesData = [
   {
-    id: 'hair-clips',
+    id: 'Hair-clips',
     name: 'Hair Clips',
-    count: 20,
-    image: '/images/products/Shiney Medium Clip 25 Rupees.jpg'
+    count: 29, 
+    image: '/images/products/Hair clips/IMG_3874.jpg' 
   },
   {
-    id: 'scrunchies',
-    name: 'Scrunchies',
-    count: 5,
-    image: '/images/products/40 Rupees Shimmer Scrunchie.jpg'
+    id: 'Hair Bands',
+    name: 'Hair Bands',
+    count: 7, 
+    image: '/images/products/Hair Bands/Clips Rubberband Card Set 60 Rupees Each.jpg' 
   },
   {
-    id: 'rubber-bands',
-    name: 'Rubber Bands',
-    count: 3,
-    image: '/images/products/Black Rubber Band Set 30 Rupees .jpg'
-  },
-  {
-    id: 'bobby-pins',
-    name: 'Bobby & Safety Pins',
-    count: 3,
-    image: '/images/products/Boby Pins 15 Rupees Set.jpg'
-  },
-  {
-    id: 'korean-clips',
-    name: 'Korean Clips',
+    id: 'Earings',
+    name: 'Earings', 
     count: 16,
-    image: '/images/products/90 Rupees (K6).jpg'
+    image: '/images/products/Earings/130 Rupees (K15).jpg'
   },
   {
-    id: 'stationery',
-    name: 'Stationery',
+    id: 'korean-pin',
+    name: 'Korean pin',
+    count: 5,
+    image: '/images/products/Korean pin/2bcc398d-44e4-41b6-8418-ae2ef822450d.jpg'
+  },
+  {
+    id: 'Pens',
+    name: 'Pens',
+    count: 3,
+    image: '/images/products/Pens/Fancy Flower Blue Pen 30 Rupees .jpg'
+  },
+  {
+    id: 'Pouches',
+    name: 'Pouches',
+    count: 1,
+    image: '/images/products/Pouch/Pouch 50 Rupees.jpg'
+  },
+  {
+    id: 'Notes and Pads',
+    name: 'Note and Pads',
+    count: 5,
+    image: '/images/products/Notes and Pads/03d9d0a7-4eeb-4d9c-b96f-c4aa44d35101.jpg'
+  },
+  {
+    id: 'Center Clips',
+    name: 'Center Clips',
+    count: 5,
+    image: '/images/products/Center clip Big/IMG_2884.jpg'
+  },
+  {
+    id: 'Glue Sticks',
+    name: 'Glue Sticks',
+    count: 1,
+    image: '/images/products/Glue stick/Glue Stick 55 Rupees Each.jpg'
+  },
+  {
+    id: 'Wipes and Papers',
+    name: 'Wipes and Papers',
     count: 6,
-    image: '/images/products/Fancy Flower Blue Pen 30 Rupees .jpg'
-  },
-  {
-    id: 'pouches',
-    name: 'Pouches & Sets',
-    count: 4,
-    image: '/images/products/Pouch 50 Rupees.jpg'
-  },
-  {
-    id: 'notepads',
-    name: 'Note Pads',
-    count: 6,
-    image: '/images/products/Note +pad 60 Rupees/IMG_3892.JPG'
+    image: '/images/products/Wipes and Paper sops/100 Rupees Packet 8 Pulls 8 Mini Packets .jpg'
   }
 ];
 

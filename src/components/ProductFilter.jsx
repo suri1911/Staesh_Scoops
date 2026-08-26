@@ -85,14 +85,14 @@ const ProductFilter = ({
           type="range"
           className="form-range"
           min="500"
-          max="6000"
+          max="5000"
           step="100"
           value={priceRange}
           onChange={(e) => setPriceRange(Number(e.target.value))}
         />
         <div className="d-flex justify-content-between text-muted extra-small">
           <span>₹500</span>
-          <span>₹6,000+</span>
+          <span>₹5,000+</span>
         </div>
       </div>
 

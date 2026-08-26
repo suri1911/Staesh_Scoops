@@ -19,18 +19,17 @@ const Navbar = () => {
   return (
     <>
       <header className="sticky-navbar">
-        {/* Top Promo Announcement Bar */}
+        {/* Top Promo Announcement Bar
         <div className="bg-dark text-white py-1 px-3 text-center extra-small font-heading" style={{ letterSpacing: '0.5px' }}>
           ✨ FREE EXPRESS SHIPPING ON WOMEN'S ACCESSORIES ORDERS ABOVE ₹1,999! CODE: <span className="text-warning fw-bold">STAESH500</span>
-        </div>
+        </div> */}
 
         <nav className="navbar navbar-expand-lg py-3">
           <div className="container">
             {/* Brand Logo */}
             <Link to="/" className="navbar-brand fw-extrabold fs-3 d-flex align-items-center gap-2">
-              <span className="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style={{ width: '38px', height: '38px', fontSize: '1.2rem' }}>
-                S
-              </span>
+            <span> <img src="../LOGO.png" alt="" className='logoda'/> </span>
+
               <span className="font-heading text-dark">
                 Staesh<span className="text-primary">_Scoops</span>
               </span>
@@ -71,7 +70,7 @@ const Navbar = () => {
                     Shop Accessories
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <NavLink to="/shop?filter=categories" className="nav-link text-dark">
                     Categories
                   </NavLink>
@@ -85,7 +84,7 @@ const Navbar = () => {
                   <NavLink to="/shop?filter=new" className="nav-link text-dark">
                     New Drops ✨
                   </NavLink>
-                </li>
+                </li> */}
               </ul>
 
               {/* Desktop Icons */}
@@ -99,6 +98,16 @@ const Navbar = () => {
                 >
                   <i className="bi bi-search"></i>
                 </button>
+
+                {/* Track Order Icon */}
+                <Link
+                  to="/track-order"
+                  className="btn btn-outline-secondary rounded-circle p-2 d-flex align-items-center justify-content-center text-decoration-none"
+                  style={{ width: '40px', height: '40px' }}
+                  title="Track Order"
+                >
+                  <i className="bi bi-geo-alt text-dark"></i>
+                </Link>
 
                 {/* Wishlist Icon */}
                 <Link

@@ -935,3 +935,1941 @@ npm run dev
 ```
 
 Do not leave major sections as empty placeholders. Provide a complete working frontend with realistic sample data and images.
+
+
+
+------------------ NEW PROMPT FOR BACKEND SERVICE -----------------
+
+# Product Requirement Document (PRD)
+
+## E-Commerce WhatsApp Transaction & Order Tracking System
+
+### 1. Product Overview
+
+**Product Type:** E-Commerce Website
+**Feature:** WhatsApp Transaction + Order Tracking System
+**Frontend:** Existing React E-Commerce Application
+**Backend:** Supabase
+**Communication:** WhatsApp Business API
+**Database:** Supabase PostgreSQL
+**Authentication:** Existing authentication system must remain unchanged
+**Payment:** Existing payment implementation must remain unchanged
+**Primary Requirement:** Add the new functionality without modifying or breaking the existing website.
+
+The objective is to extend the existing e-commerce website with a complete **order transaction, WhatsApp notification, order status, and frontend tracking flow**.
+
+The existing website must remain visually and functionally identical unless a new tracking/transaction element is specifically required.
+
+---
+
+# 2. Critical Development Rule
+
+## DO NOT CHANGE THE EXISTING CODE UNNECESSARILY
+
+The existing application is already developed.
+
+The developer/AI must:
+
+* NOT redesign the existing website.
+* NOT change the existing color scheme.
+* NOT change typography.
+* NOT replace existing components.
+* NOT remove existing pages.
+* NOT rename existing components unnecessarily.
+* NOT change existing routes.
+* NOT modify existing product cards.
+* NOT modify existing navigation.
+* NOT modify existing authentication.
+* NOT modify existing payment UI.
+* NOT remove existing features.
+* NOT rewrite working code simply for optimization.
+* NOT replace the existing technology stack.
+* NOT introduce unnecessary libraries.
+* NOT change responsive behavior.
+* NOT change existing API behavior.
+
+### Extension Strategy
+
+Use an **additive development approach**.
+
+Add only:
+
+1. WhatsApp transaction functionality.
+2. Order creation/update functionality where required.
+3. Order tracking.
+4. Order status management.
+5. WhatsApp notification integration.
+6. Tracking UI.
+7. Required Supabase database tables/functions.
+8. Required backend/API endpoints.
+9. Required environment variables.
+10. Minimal UI elements required to expose the new functionality.
+
+If an existing component must be modified, make the **smallest possible change** and preserve all existing behavior.
+
+---
+
+# 3. Main User Journey
+
+The complete customer flow should be:
+
+```text
+Customer visits website
+        ↓
+Browses products
+        ↓
+Adds products to cart
+        ↓
+Views cart
+        ↓
+Checkout
+        ↓
+Customer enters/uses existing details
+        ↓
+Payment process
+        ↓
+Payment verification
+        ↓
+Order created
+        ↓
+Unique Order ID generated
+        ↓
+Order stored in Supabase
+        ↓
+WhatsApp transaction initiated
+        ↓
+Customer receives WhatsApp confirmation
+        ↓
+Seller/Admin receives order notification
+        ↓
+Order Processing
+        ↓
+Order Packed
+        ↓
+Order Shipped
+        ↓
+Tracking Number Generated
+        ↓
+Out for Delivery
+        ↓
+Delivered
+        ↓
+Customer receives WhatsApp status updates
+        ↓
+Customer tracks order from website
+```
+
+---
+
+# 4. Customer Features
+
+## 4.1 Order Confirmation
+
+After successful order placement:
+
+Display the existing success page/modal if one already exists.
+
+Add only the required information:
+
+* Order ID
+* Order date
+* Total amount
+* Payment status
+* Order status
+* Estimated delivery
+* Tracking option
+* WhatsApp notification status
+
+Example:
+
+```text
+Order Confirmed
+
+Order ID: #SS-20260813-0001
+
+Payment: Successful
+Order Status: Confirmed
+
+Estimated Delivery:
+18 August 2026
+
+[Track Order]
+
+WhatsApp confirmation sent
+```
+
+Do not redesign the existing success page.
+
+---
+
+# 5. WhatsApp Transaction System
+
+## 5.1 Purpose
+
+WhatsApp will be used for transactional communication related to orders.
+
+The system should support:
+
+### Customer notifications
+
+1. Order placed
+2. Payment successful
+3. Order confirmed
+4. Order processing
+5. Order packed
+6. Order shipped
+7. Tracking number available
+8. Out for delivery
+9. Delivered
+10. Order cancelled
+11. Refund initiated
+12. Refund completed
+
+---
+
+# 6. WhatsApp Message Flow
+
+## Order Confirmation
+
+Example message:
+
+```text
+Hello {{customer_name}} 👋
+
+Thank you for your order with {{store_name}}.
+
+Your order has been successfully placed.
+
+Order ID: {{order_id}}
+Amount: ₹{{amount}}
+Payment Status: {{payment_status}}
+
+Estimated Delivery:
+{{estimated_delivery}}
+
+Track your order:
+{{tracking_url}}
+
+Thank you for shopping with us.
+```
+
+---
+
+## Order Shipped
+
+```text
+Hello {{customer_name}} 👋
+
+Your order {{order_id}} has been shipped.
+
+Courier: {{courier_name}}
+Tracking Number: {{tracking_number}}
+
+Track your shipment:
+{{tracking_url}}
+
+Estimated Delivery:
+{{estimated_delivery}}
+
+Thank you for shopping with {{store_name}}.
+```
+
+---
+
+## Out for Delivery
+
+```text
+Hello {{customer_name}} 👋
+
+Your order {{order_id}} is out for delivery 🚚.
+
+Please keep your phone available.
+
+Tracking:
+{{tracking_url}}
+```
+
+---
+
+## Delivered
+
+```text
+Hello {{customer_name}} 🎉
+
+Your order {{order_id}} has been delivered successfully.
+
+Thank you for shopping with {{store_name}}.
+
+We hope you enjoy your purchase!
+```
+
+---
+
+# 7. WhatsApp API Architecture
+
+Use the official WhatsApp Business Platform/API or an approved WhatsApp Business API provider.
+
+Do not expose API credentials in React frontend code.
+
+The architecture must be:
+
+```text
+React Frontend
+      ↓
+Secure Backend/API
+      ↓
+Supabase
+      ↓
+WhatsApp API
+      ↓
+Customer WhatsApp
+```
+
+Never do:
+
+```text
+React
+  ↓
+WhatsApp API Secret
+```
+
+API credentials must remain server-side.
+
+---
+
+# 8. WhatsApp Transaction Trigger
+
+When an order is successfully created:
+
+```text
+Create Order
+     ↓
+Verify Payment
+     ↓
+Generate Order ID
+     ↓
+Save Order in Supabase
+     ↓
+Trigger WhatsApp Notification
+     ↓
+Send Transaction Template
+     ↓
+Store WhatsApp Message Status
+```
+
+The WhatsApp notification failure must **not cancel or corrupt the customer's order**.
+
+For example:
+
+```text
+Order = SUCCESS
+WhatsApp = FAILED
+```
+
+The order must remain successful.
+
+The system should retry the WhatsApp notification where appropriate.
+
+---
+
+# 9. Order Tracking System
+
+Create a complete order tracking system on the frontend.
+
+The customer should be able to track an order using:
+
+```text
+Order ID
++
+Customer verification
+```
+
+or through an authenticated customer's order history.
+
+---
+
+# 10. Tracking Page
+
+Create a new route only if the existing application does not already have an appropriate tracking route.
+
+Example:
+
+```text
+/track-order
+```
+
+Possible URL:
+
+```text
+/track-order?order=SS-20260813-0001
+```
+
+The page should contain:
+
+```text
+Track Your Order
+
+Enter Order ID
+[ SS-20260813-0001 ]
+
+[Track Order]
+```
+
+After verification:
+
+```text
+Order #SS-20260813-0001
+
+✓ Order Confirmed
+✓ Processing
+✓ Packed
+✓ Shipped
+● Out for Delivery
+○ Delivered
+
+Courier:
+DHL
+
+Tracking Number:
+XXXXXXXX
+
+Estimated Delivery:
+18 August 2026
+```
+
+---
+
+# 11. Tracking Timeline
+
+The frontend tracking timeline should support these states:
+
+```text
+Order Placed
+     ↓
+Payment Confirmed
+     ↓
+Order Confirmed
+     ↓
+Processing
+     ↓
+Packed
+     ↓
+Shipped
+     ↓
+Out for Delivery
+     ↓
+Delivered
+```
+
+Optional states:
+
+```text
+Cancelled
+Refund Initiated
+Refund Completed
+Delivery Failed
+Returned
+```
+
+Each status should have:
+
+* Status name
+* Date
+* Time
+* Description
+* Optional location
+* Optional tracking number
+
+---
+
+# 12. Order Status Model
+
+Use a controlled status system.
+
+Recommended values:
+
+```text
+pending
+payment_pending
+confirmed
+processing
+packed
+shipped
+out_for_delivery
+delivered
+cancelled
+refund_initiated
+refunded
+returned
+delivery_failed
+```
+
+Do not allow arbitrary status strings from the frontend.
+
+---
+
+# 13. Supabase Database Design
+
+Create the minimum required tables without modifying existing tables unnecessarily.
+
+## orders
+
+Recommended fields:
+
+```text
+id
+order_number
+user_id
+customer_name
+customer_email
+customer_phone
+shipping_address
+billing_address
+subtotal
+shipping_amount
+discount_amount
+tax_amount
+total_amount
+currency
+payment_status
+order_status
+tracking_number
+courier_name
+estimated_delivery
+created_at
+updated_at
+```
+
+---
+
+## order_items
+
+```text
+id
+order_id
+product_id
+product_name
+quantity
+unit_price
+total_price
+created_at
+```
+
+---
+
+## order_status_history
+
+```text
+id
+order_id
+status
+title
+description
+location
+tracking_number
+created_at
+```
+
+Example:
+
+```text
+order_id: 123
+
+status: shipped
+title: Order Shipped
+description: Your package has been handed over to the courier.
+location: Chennai
+tracking_number: ABC123456
+created_at: timestamp
+```
+
+---
+
+# 14. WhatsApp Messages Table
+
+Create a table for tracking WhatsApp transactions.
+
+## whatsapp_messages
+
+```text
+id
+order_id
+customer_id
+phone_number
+template_name
+message_type
+message_status
+provider_message_id
+error_message
+sent_at
+delivered_at
+read_at
+created_at
+```
+
+Possible statuses:
+
+```text
+queued
+sent
+delivered
+read
+failed
+```
+
+This provides transaction auditing.
+
+---
+
+# 15. Row Level Security
+
+Supabase Row Level Security must be implemented.
+
+Customers should only be able to access their own orders.
+
+Example logical rule:
+
+```text
+Authenticated customer
+        ↓
+Can view
+        ↓
+Only their own orders
+```
+
+Customers must NOT be able to access:
+
+* Other customers' orders
+* Other customers' phone numbers
+* Other customers' addresses
+* Internal WhatsApp data
+* API credentials
+* Admin information
+
+---
+
+# 16. Admin Order Management
+
+If the existing application has an admin dashboard, extend it rather than replacing it.
+
+Add:
+
+```text
+Orders
+```
+
+with:
+
+```text
+Order ID
+Customer
+Amount
+Payment Status
+Order Status
+Courier
+Tracking Number
+Created Date
+```
+
+Admin should be able to update:
+
+```text
+Confirmed
+Processing
+Packed
+Shipped
+Out for Delivery
+Delivered
+Cancelled
+Refund Initiated
+Refunded
+```
+
+---
+
+# 17. Admin Tracking Update Flow
+
+When admin changes:
+
+```text
+Processing
+```
+
+to:
+
+```text
+Packed
+```
+
+the system should:
+
+```text
+Update orders.order_status
+        ↓
+Insert order_status_history
+        ↓
+Trigger WhatsApp notification
+        ↓
+Customer receives message
+```
+
+For shipping:
+
+```text
+Admin enters:
+
+Courier
+Tracking Number
+Estimated Delivery
+
+        ↓
+
+Order becomes:
+Shipped
+
+        ↓
+
+Save information
+        ↓
+
+Create tracking history
+        ↓
+
+Send WhatsApp notification
+```
+
+---
+
+# 18. Tracking API
+
+Create secure backend endpoints/functions.
+
+Example:
+
+```text
+POST /api/orders/create
+GET /api/orders/:orderId
+GET /api/orders/:orderId/tracking
+POST /api/orders/:orderId/status
+POST /api/whatsapp/send
+POST /api/whatsapp/webhook
+```
+
+If the existing architecture uses different API conventions, follow the existing architecture instead of forcing these exact routes.
+
+---
+
+# 19. WhatsApp Webhook
+
+Implement webhook handling for WhatsApp provider events.
+
+The webhook should process events such as:
+
+```text
+sent
+delivered
+read
+failed
+```
+
+Example:
+
+```text
+WhatsApp Provider
+       ↓
+Webhook
+       ↓
+Backend
+       ↓
+whatsapp_messages
+       ↓
+Update message status
+```
+
+---
+
+# 20. Payment Integration
+
+Do not replace or modify the existing payment system unless required.
+
+The existing payment flow must remain unchanged.
+
+The new architecture should integrate with the payment success event:
+
+```text
+Existing Payment
+       ↓
+Payment Success
+       ↓
+Order Creation
+       ↓
+WhatsApp Notification
+       ↓
+Tracking
+```
+
+Never trust payment success based solely on frontend information.
+
+Payment verification must happen server-side through the existing payment provider's supported mechanism.
+
+---
+
+# 21. Error Handling
+
+The system must gracefully handle:
+
+### WhatsApp failure
+
+```text
+Order successful
+WhatsApp failed
+```
+
+Show:
+
+```text
+Your order was successfully placed.
+
+WhatsApp notification could not be sent.
+You can still track your order from your account.
+```
+
+### Tracking number missing
+
+Show:
+
+```text
+Tracking information will be available once your order is shipped.
+```
+
+### Invalid Order ID
+
+Show:
+
+```text
+We couldn't find an order with that ID.
+Please check your Order ID and try again.
+```
+
+### Network failure
+
+Show:
+
+```text
+Unable to load tracking information.
+Please try again.
+```
+
+---
+
+# 22. Frontend UX Requirements
+
+The new UI must match the existing website.
+
+Do not introduce a completely different design system.
+
+Reuse:
+
+* Existing buttons
+* Existing cards
+* Existing typography
+* Existing spacing
+* Existing colors
+* Existing icons
+* Existing responsive patterns
+* Existing components
+
+Only create new components when required.
+
+Suggested components:
+
+```text
+OrderTracking
+TrackingTimeline
+OrderStatus
+TrackingDetails
+WhatsAppStatus
+OrderConfirmation
+ShipmentDetails
+```
+
+---
+
+# 23. Responsive Requirements
+
+The tracking system must work on:
+
+```text
+Desktop
+Laptop
+Tablet
+Mobile
+```
+
+The existing responsive design must not be broken.
+
+Mobile tracking example:
+
+```text
+Order #SS-20260813-0001
+
+✓ Confirmed
+│
+✓ Processing
+│
+✓ Packed
+│
+● Shipped
+│
+○ Out for Delivery
+│
+○ Delivered
+```
+
+---
+
+# 24. Security Requirements
+
+Never expose:
+
+```text
+WHATSAPP_ACCESS_TOKEN
+WHATSAPP_API_SECRET
+WEBHOOK_SECRET
+SUPABASE_SERVICE_ROLE_KEY
+PAYMENT_SECRET
+```
+
+inside React source code.
+
+Use environment variables/server-side secrets.
+
+Frontend should only use public configuration that is safe to expose.
+
+---
+
+# 25. Environment Variables
+
+Use environment variables similar to:
+
+```text
+WHATSAPP_ACCESS_TOKEN=
+WHATSAPP_PHONE_NUMBER_ID=
+WHATSAPP_BUSINESS_ACCOUNT_ID=
+WHATSAPP_WEBHOOK_VERIFY_TOKEN=
+WHATSAPP_API_VERSION=
+```
+
+If the existing project already uses environment variables, follow its naming convention.
+
+Never hardcode secrets.
+
+---
+
+# 26. WhatsApp Template Requirements
+
+Because WhatsApp transactional messaging may require approved message templates, create templates for:
+
+```text
+order_confirmation
+payment_confirmation
+order_processing
+order_packed
+order_shipped
+out_for_delivery
+order_delivered
+order_cancelled
+refund_initiated
+refund_completed
+```
+
+Template variables should include only the information necessary for that notification.
+
+---
+
+# 27. Order ID Generation
+
+Generate a unique customer-friendly order number.
+
+Example:
+
+```text
+SS-20260813-0001
+SS-20260813-0002
+SS-20260813-0003
+```
+
+The database primary key should remain independent from the display order number.
+
+Order numbers must be unique.
+
+---
+
+# 28. Tracking Number
+
+Tracking numbers should be stored separately from the order ID.
+
+Example:
+
+```text
+Order ID:
+SS-20260813-0001
+
+Courier:
+DHL
+
+Tracking Number:
+DHL123456789
+```
+
+---
+
+# 29. Real-Time Tracking
+
+If appropriate for the existing Supabase architecture, use Supabase Realtime for order-status updates.
+
+Flow:
+
+```text
+Admin updates order
+       ↓
+Supabase
+       ↓
+Realtime event
+       ↓
+Customer frontend
+       ↓
+Tracking timeline updates
+```
+
+The customer should not need to refresh the page unnecessarily.
+
+If realtime is not appropriate, implement safe polling/fetching while preserving performance.
+
+---
+
+# 30. Order History
+
+Authenticated users should have an order history section if the existing website supports accounts.
+
+Example:
+
+```text
+My Orders
+
+#SS-20260813-0001
+₹2,499
+Delivered
+[View Order]
+
+#SS-20260810-0008
+₹1,299
+Shipped
+[Track Order]
+```
+
+Do not replace the existing account page.
+
+Extend it only where necessary.
+
+---
+
+# 31. WhatsApp Status Indicator
+
+Where appropriate, display:
+
+```text
+WhatsApp Notification
+✓ Sent
+```
+
+or:
+
+```text
+WhatsApp Notification
+✓ Delivered
+```
+
+or:
+
+```text
+WhatsApp Notification
+⚠ Failed
+```
+
+Do not expose internal API error details to customers.
+
+---
+
+# 32. Database Relationship
+
+Recommended relationship:
+
+```text
+Users
+  │
+  └── Orders
+        │
+        ├── Order Items
+        │
+        ├── Order Status History
+        │
+        └── WhatsApp Messages
+```
+
+---
+
+# 33. Complete System Architecture
+
+```text
+                         CUSTOMER
+                            │
+                            ▼
+                    EXISTING REACT SITE
+                            │
+             ┌──────────────┼──────────────┐
+             │              │              │
+             ▼              ▼              ▼
+           Cart          Checkout       Tracking
+             │              │              │
+             └──────────────┼──────────────┘
+                            ▼
+                     Existing Backend
+                            │
+                            ▼
+                    Payment Verification
+                            │
+                            ▼
+                       SUPABASE
+                            │
+             ┌──────────────┼──────────────┐
+             │              │              │
+             ▼              ▼              ▼
+          Orders       Order Items     Status History
+             │
+             ▼
+                    WhatsApp Service
+                            │
+                            ▼
+                   WhatsApp Business API
+                            │
+                            ▼
+                    CUSTOMER WHATSAPP
+
+
+ADMIN
+  │
+  ▼
+Admin Dashboard
+  │
+  ▼
+Update Order Status
+  │
+  ▼
+Supabase
+  │
+  ├── Update Order
+  ├── Add Status History
+  └── Trigger WhatsApp
+```
+
+---
+
+# 34. Complete Order Lifecycle
+
+```text
+PENDING
+   ↓
+PAYMENT_PENDING
+   ↓
+CONFIRMED
+   ↓
+PROCESSING
+   ↓
+PACKED
+   ↓
+SHIPPED
+   ↓
+OUT_FOR_DELIVERY
+   ↓
+DELIVERED
+```
+
+Alternative path:
+
+```text
+Any applicable stage
+       ↓
+CANCELLED
+```
+
+Refund:
+
+```text
+CANCELLED
+    ↓
+REFUND_INITIATED
+    ↓
+REFUNDED
+```
+
+---
+
+# 35. Product Requirements
+
+## Functional Requirements
+
+### FR-01
+
+System must preserve the existing e-commerce frontend.
+
+### FR-02
+
+System must create an order after successful payment.
+
+### FR-03
+
+System must generate a unique order number.
+
+### FR-04
+
+System must save order information in Supabase.
+
+### FR-05
+
+System must initiate WhatsApp transactional notification.
+
+### FR-06
+
+System must record WhatsApp notification status.
+
+### FR-07
+
+System must provide frontend order tracking.
+
+### FR-08
+
+System must maintain order status history.
+
+### FR-09
+
+Admin must be able to update order status.
+
+### FR-10
+
+Status updates should trigger appropriate WhatsApp notifications.
+
+### FR-11
+
+Customer must only access authorized order information.
+
+### FR-12
+
+Tracking must work on mobile and desktop.
+
+### FR-13
+
+WhatsApp failures must not break successful orders.
+
+### FR-14
+
+Payment secrets and WhatsApp credentials must remain server-side.
+
+### FR-15
+
+The system must handle API errors gracefully.
+
+---
+
+# 36. Non-Functional Requirements
+
+## Performance
+
+Tracking information should load quickly.
+
+Avoid unnecessary API requests.
+
+Use appropriate database indexes.
+
+## Security
+
+Implement:
+
+* Authentication
+* Authorization
+* RLS
+* Server-side secrets
+* Input validation
+* API validation
+* Webhook verification
+
+## Reliability
+
+An external WhatsApp API failure must not cause order creation to fail.
+
+## Scalability
+
+The architecture should support increasing:
+
+```text
+Products
+Customers
+Orders
+WhatsApp messages
+Tracking events
+```
+
+without requiring a complete rewrite.
+
+---
+
+# 37. Validation
+
+Validate:
+
+```text
+Phone number
+Order ID
+User ID
+Payment status
+Order status
+Tracking number
+Courier
+Amounts
+Database IDs
+Webhook requests
+```
+
+Never trust frontend values for sensitive operations.
+
+---
+
+# 38. Testing Requirements
+
+## Frontend Testing
+
+Test:
+
+```text
+Cart
+Checkout
+Order confirmation
+Tracking page
+Order history
+Mobile tracking
+Desktop tracking
+Invalid order ID
+Loading states
+Error states
+```
+
+## Backend Testing
+
+Test:
+
+```text
+Order creation
+Payment verification
+Order status updates
+WhatsApp API
+Webhook
+Database operations
+Authorization
+RLS
+Error handling
+```
+
+## WhatsApp Testing
+
+Test:
+
+```text
+Message sent
+Message delivered
+Message read
+Message failed
+Invalid phone number
+API unavailable
+Template unavailable
+Webhook received
+```
+
+---
+
+# 39. Acceptance Criteria
+
+The implementation is complete only when:
+
+* Existing website functionality still works.
+* Existing design remains unchanged.
+* Existing payment flow remains functional.
+* Orders are successfully stored.
+* Unique order IDs are generated.
+* Tracking page works.
+* Tracking timeline works.
+* Admin can update order status.
+* Status history is recorded.
+* WhatsApp notifications are triggered.
+* WhatsApp credentials are secure.
+* Customer cannot access another customer's order.
+* Mobile UI works.
+* Desktop UI works.
+* WhatsApp failure does not break order creation.
+* Payment failure does not create a completed order.
+* Webhook events are processed.
+* Error states are handled correctly.
+
+---
+
+# 40. MASTER AI DEVELOPMENT PROMPT
+
+Use the following prompt directly with Claude Opus/Cursor/Windsurf:
+
+---
+
+## ROLE
+
+Act as a senior full-stack engineer specializing in React, Supabase, e-commerce systems, payment workflows, WhatsApp Business API integration, security, and order-tracking systems.
+
+I already have a working React-based e-commerce website.
+
+Your job is to **EXTEND my existing application**, not rebuild it.
+
+## MOST IMPORTANT RULE
+
+**DO NOT CHANGE ANYTHING THAT IS ALREADY WORKING UNLESS IT IS ABSOLUTELY REQUIRED FOR THE NEW FEATURE.**
+
+Do not redesign my website.
+
+Do not change existing:
+
+* UI
+* colors
+* typography
+* layout
+* navigation
+* product pages
+* cart
+* checkout design
+* authentication
+* payment UI
+* routes
+* components
+* CSS
+* responsive behavior
+* existing APIs
+
+Do not rewrite existing code just because you prefer another architecture.
+
+First inspect the existing project.
+
+Understand its:
+
+```text
+folder structure
+components
+routes
+state management
+authentication
+Supabase integration
+database calls
+payment integration
+environment variables
+API structure
+existing UI components
+```
+
+Then implement the new functionality using the existing architecture.
+
+---
+
+## NEW FEATURES TO ADD
+
+I want to add:
+
+### 1. WhatsApp transactional messaging
+
+Use the official WhatsApp Business API or an approved WhatsApp Business API provider.
+
+The WhatsApp API must be called from a secure backend/server-side environment.
+
+Never expose:
+
+```text
+WhatsApp access token
+WhatsApp secret
+Supabase service-role key
+payment secret
+webhook secret
+```
+
+in the React frontend.
+
+---
+
+### 2. Order transaction flow
+
+Implement:
+
+```text
+Customer
+↓
+Existing Product Page
+↓
+Existing Cart
+↓
+Existing Checkout
+↓
+Existing Payment
+↓
+Payment Verification
+↓
+Create Order
+↓
+Generate Order Number
+↓
+Save Order
+↓
+Send WhatsApp Confirmation
+↓
+Display Existing/Minimal Order Success UI
+↓
+Track Order
+```
+
+Do not replace the existing checkout or payment system.
+
+---
+
+### 3. Order tracking
+
+Add a tracking feature.
+
+If there is no existing tracking route, create:
+
+```text
+/track-order
+```
+
+The customer should be able to enter:
+
+```text
+Order ID
+```
+
+and see:
+
+```text
+Order Confirmed
+Processing
+Packed
+Shipped
+Out for Delivery
+Delivered
+```
+
+with timestamps and tracking information.
+
+---
+
+### 4. Supabase
+
+Use Supabase PostgreSQL for order/tracking information.
+
+Create only the required tables.
+
+Recommended:
+
+```text
+orders
+order_items
+order_status_history
+whatsapp_messages
+```
+
+Before creating duplicate tables, inspect the existing database/schema.
+
+If equivalent tables already exist, reuse them instead of creating duplicates.
+
+---
+
+### 5. Order statuses
+
+Use controlled statuses:
+
+```text
+pending
+payment_pending
+confirmed
+processing
+packed
+shipped
+out_for_delivery
+delivered
+cancelled
+refund_initiated
+refunded
+returned
+delivery_failed
+```
+
+---
+
+### 6. WhatsApp notifications
+
+Implement transactional notifications for:
+
+```text
+Order Confirmed
+Payment Successful
+Processing
+Packed
+Shipped
+Out for Delivery
+Delivered
+Cancelled
+Refund Initiated
+Refund Completed
+```
+
+Use WhatsApp-approved templates where required.
+
+Store notification status in the database.
+
+---
+
+### 7. Admin flow
+
+If an admin dashboard already exists, extend it.
+
+Do not rebuild it.
+
+Allow authorized admins to update:
+
+```text
+Order status
+Courier
+Tracking number
+Estimated delivery
+```
+
+When status changes:
+
+```text
+Update order
+↓
+Create status history
+↓
+Trigger WhatsApp notification
+```
+
+---
+
+### 8. WhatsApp failure handling
+
+This is extremely important.
+
+If:
+
+```text
+Order creation = SUCCESS
+WhatsApp = FAILED
+```
+
+the order must remain successful.
+
+Never roll back a valid order just because WhatsApp failed.
+
+Implement retry/error logging where appropriate.
+
+---
+
+### 9. Security
+
+Implement:
+
+```text
+Supabase RLS
+Authentication checks
+Authorization
+Server-side API calls
+Input validation
+Webhook verification
+Secure environment variables
+```
+
+A customer must never be able to retrieve another customer's order.
+
+---
+
+### 10. Frontend design rule
+
+Reuse the existing design.
+
+Create new components only when necessary.
+
+Possible components:
+
+```text
+OrderTracking
+TrackingTimeline
+OrderStatus
+ShipmentDetails
+OrderConfirmation
+WhatsAppStatus
+```
+
+Match the existing:
+
+```text
+colors
+fonts
+buttons
+cards
+spacing
+icons
+animations
+responsive behavior
+```
+
+Do not create a completely new visual design.
+
+---
+
+# IMPLEMENTATION PROCESS
+
+Follow this exact development process.
+
+## STEP 1 — Inspect
+
+First inspect the entire project structure.
+
+Identify:
+
+```text
+React entry point
+Routes
+Components
+Pages
+Hooks
+Context
+State management
+Supabase configuration
+Existing API
+Payment implementation
+Authentication
+Admin dashboard
+Environment variables
+```
+
+Do not modify anything during the inspection stage.
+
+---
+
+## STEP 2 — Create an integration plan
+
+Before changing files, identify:
+
+```text
+Files that must be modified
+Files that must be created
+Database changes
+Backend changes
+Environment variables
+New routes
+New components
+```
+
+Keep the changes minimal.
+
+---
+
+## STEP 3 — Database
+
+Inspect the current Supabase database.
+
+Reuse existing tables where possible.
+
+Create missing tables/functions only where required.
+
+Implement:
+
+```text
+orders
+order_items
+order_status_history
+whatsapp_messages
+```
+
+with appropriate:
+
+```text
+primary keys
+foreign keys
+indexes
+constraints
+timestamps
+RLS policies
+```
+
+---
+
+## STEP 4 — Backend
+
+Implement secure server-side functionality.
+
+The frontend must never directly call the WhatsApp API using private credentials.
+
+Implement the appropriate server/API functions based on the existing project architecture.
+
+---
+
+## STEP 5 — Order flow
+
+Connect the new functionality to the existing successful payment flow.
+
+The sequence should be:
+
+```text
+Payment Success
+↓
+Server-side Verification
+↓
+Create Order
+↓
+Create Order Items
+↓
+Create Initial Status
+↓
+Send WhatsApp
+↓
+Return Order Number
+```
+
+Use database transactions or idempotency mechanisms where appropriate so duplicate payment callbacks cannot create duplicate orders.
+
+---
+
+## STEP 6 — Tracking
+
+Implement the tracking page/component.
+
+It should retrieve the order securely and show:
+
+```text
+Order Number
+Order Date
+Payment Status
+Current Order Status
+Items
+Total
+Courier
+Tracking Number
+Estimated Delivery
+Status Timeline
+```
+
+Do not expose sensitive information.
+
+---
+
+## STEP 7 — Admin
+
+Connect status changes to:
+
+```text
+orders
+order_status_history
+WhatsApp notifications
+```
+
+---
+
+## STEP 8 — WhatsApp webhook
+
+Implement webhook handling for:
+
+```text
+sent
+delivered
+read
+failed
+```
+
+Store provider message IDs and status updates.
+
+---
+
+## STEP 9 — Error handling
+
+Implement proper:
+
+```text
+loading
+success
+empty
+error
+retry
+unauthorized
+not found
+```
+
+states.
+
+---
+
+## STEP 10 — Testing
+
+After implementation test:
+
+```text
+Normal order
+Successful payment
+Failed payment
+Duplicate payment callback
+WhatsApp success
+WhatsApp failure
+Tracking
+Invalid order ID
+Unauthorized order access
+Admin status update
+Shipping update
+Delivered update
+Mobile layout
+Desktop layout
+```
+
+---
+
+# IMPORTANT FINAL REQUIREMENT
+
+After making the changes, provide a clear implementation report:
+
+```text
+1. Files created
+2. Files modified
+3. Database tables created/modified
+4. API/backend functions created
+5. Environment variables required
+6. WhatsApp templates required
+7. Routes added
+8. Security measures implemented
+9. Testing performed
+10. Any remaining setup required
+```
+
+Most importantly:
+
+**Do not rewrite my existing e-commerce application.**
+
+**Do not redesign it.**
+
+**Do not remove existing functionality.**
+
+**Do not replace the existing payment system.**
+
+**Do not expose secrets.**
+
+**Add the WhatsApp transaction and order-tracking system on top of the existing application while preserving everything that already works.**
+
+The final result must feel like the same e-commerce website, with the new WhatsApp transaction and order-tracking capabilities seamlessly integrated.

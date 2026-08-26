@@ -11,7 +11,7 @@ const Shop = () => {
 
   // Filter States
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [priceRange, setPriceRange] = useState(6000);
+  const [priceRange, setPriceRange] = useState(5000);
   const [minRating, setMinRating] = useState(0);
   const [sortBy, setSortBy] = useState('popularity');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
@@ -34,7 +34,7 @@ const Shop = () => {
   // Reset Filters
   const resetFilters = () => {
     setSelectedCategory('All');
-    setPriceRange(6000);
+    setPriceRange(5000);
     setMinRating(0);
     setSortBy('popularity');
     setSearchQuery('');
@@ -124,7 +124,7 @@ const Shop = () => {
           </div>
 
           {/* Active Filters Display */}
-          {(selectedCategory !== 'All' || priceRange < 6000 || minRating > 0 || searchQuery) && (
+          {(selectedCategory !== 'All' || priceRange < 5000 || minRating > 0 || searchQuery) && (
             <div className="d-flex flex-wrap align-items-center gap-2 mt-3 pt-3 border-top">
               <span className="text-muted extra-small fw-bold">Active Filters:</span>
 
@@ -135,10 +135,10 @@ const Shop = () => {
                 </span>
               )}
 
-              {priceRange < 6000 && (
+              {priceRange < 5000 && (
                 <span className="filter-pill">
                   Under ₹{priceRange.toLocaleString('en-IN')}
-                  <button onClick={() => setPriceRange(6000)}>×</button>
+                  <button onClick={() => setPriceRange(5000)}>×</button>
                 </span>
               )}
 
